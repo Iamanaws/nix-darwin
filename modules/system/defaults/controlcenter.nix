@@ -37,13 +37,16 @@ in
         hide = 12;
       } 12;
       description = ''
-        Apple menu > System Preferences > Control Center > Accessibility Shortcuts
+        Show an Accessibility Shortcuts control in menu bar.
 
-        Options:
-          both           - Show in Menu Bar and Control Center (3)
-          menuBar        - Show in Menu Bar only (6)
-          controlCenter  - Show in Control Center only (1 or 9)
-          hide           - Don't Show (2, 4, 8, or 12)
+        This option mirrors the setting found in:
+          System Preferences > Control Center > AccessibilityShortcuts
+
+        Available settings:
+          both           - Show in both the Menu Bar and Control Center (3)
+          menuBar        - Show in the Menu Bar only (6)
+          controlCenter  - Show in Control Center only (9)
+          hide           - Don't Show (12)
       '';
     };
 
@@ -55,12 +58,14 @@ in
         false = 24;
       };
       description = ''
-        Apple menu > System Preferences > Control Center > AirDrop
+        Show an AirDrop control in menu bar.
 
-        Show a AirDrop control in menu bar. Default is null.
+        This option mirrors the setting found in:
+          System Preferences > Control Center > AirDrop
 
-        18 = Show in Menu Bar
-        24 = Don't Show in Menu Bar
+        Available settings:
+          true   - Show in Menu Bar (18)
+          false  - Don't Show in Menu Bar (24)
       '';
     };
 
@@ -81,26 +86,40 @@ in
         hide = 12;
       } 4;
       description = ''
-        Apple menu > System Preferences > Control Center > Battery
+        Show a Battery control in menu bar.
 
-        Options:
-          both           - Show in Menu Bar and Control Center (3)
-          menuBar        - Show in Menu Bar only (6)
-          controlCenter  - Show in Control Center only (1 or 9)
-          hide           - Don't Show (2, 4, 8, or 12)
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Battery
+
+        Available settings:
+          both           - Show in both the Menu Bar and Control Center (3)
+          menuBar        - Show in the Menu Bar only (4)
+          controlCenter  - Show in Control Center only (9)
+          hide           - Don't Show (12)
       '';
     };
 
     system.defaults.controlcenter.BatteryShowEnergyMode = lib.mkOption {
-      type = lib.types.nullOr lib.types.bool;
+      type = lib.types.nullOr (
+        lib.types.enum [
+          "whenActive"
+          "always"
+        ]
+      );
       default = null;
+      apply = mkEnumApply {
+        always = true;
+        whenActive = false;
+      } false;
       description = ''
-        Apple menu > System Preferences > Control Center > Battery
+        Show a Battery Energy Mode control in menu bar.
 
-        Show a battery energy mode. Default is null.
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Battery
 
-        false - "When Active"
-        true  - "Always"
+        Available settings:
+          whenActive  - Show When Active
+          always      - Always Show
       '';
     };
 
@@ -108,9 +127,14 @@ in
       type = lib.types.nullOr lib.types.bool;
       default = null;
       description = ''
-        Apple menu > System Preferences > Control Center > Battery
+        Show a Battery Percentage control in menu bar.
 
-        Show a battery percentage in menu bar. Default is null.
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Battery
+
+        Available settings:
+          true  - Show in Menu Bar
+          false - Don't Show in Menu Bar
       '';
     };
 
@@ -122,12 +146,14 @@ in
         false = 24;
       };
       description = ''
-        Apple menu > System Preferences > Control Center > Bluetooth
+        Show a Bluetooth control in menu bar.
 
-        Show a bluetooth control in menu bar. Default is null.
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Bluetooth
 
-        18 = Show in Menu Bar
-        24 = Don't Show in Menu Bar
+        Available settings:
+          true   - Show in Menu Bar (18)
+          false  - Don't Show in Menu Bar (24)
       '';
     };
 
@@ -137,6 +163,8 @@ in
           "whenActive"
           "hide"
           "always"
+          true
+          false
         ]
       );
       default = null;
@@ -144,14 +172,22 @@ in
         always = 18;
         hide = 8;
         whenActive = 2;
+
+        true = lib.warn "Using 'true' is deprecated; please use \"always\" instead" 18;
+        false = lib.warn "Using 'false' is deprecated; please use \"whenActive\" instead" 2;
       } 2;
       description = ''
-        Apple menu > System Preferences > Control Center > Display
+        Show a Display control in menu bar.
 
-        Options:
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Display
+
+        Available settings:
           whenActive  - Show When Active (2)
           hide        - Don't Show in Menu Bar (8)
           always      - Always Show in Menu Bar (18)
+
+        Note: Boolean values are deprecated; please use the enum values.
       '';
     };
 
@@ -161,6 +197,8 @@ in
           "whenActive"
           "hide"
           "always"
+          true
+          false
         ]
       );
       default = null;
@@ -168,14 +206,22 @@ in
         always = 18;
         hide = 8;
         whenActive = 2;
+
+        true = lib.warn "Using 'true' is deprecated; please use \"always\" instead" 18;
+        false = lib.warn "Using 'false' is deprecated; please use \"whenActive\" instead" 2;
       } 2;
       description = ''
-        Apple menu > System Preferences > Control Center > Focus
+        Show a Focus control in menu bar.
 
-        Options:
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Focus
+
+        Available settings:
           whenActive  - Show When Active (2)
           hide        - Don't Show in Menu Bar (8)
           always      - Always Show in Menu Bar (18)
+
+        Note: Boolean values are deprecated; please use the enum values.
       '';
     };
 
@@ -196,13 +242,16 @@ in
         hide = 12;
       } 12;
       description = ''
-        Apple menu > System Preferences > Control Center > Hearing
+        Show a Hearing control in menu bar.
 
-        Options:
-          both           - Show in Menu Bar and Control Center (3)
-          menuBar        - Show in Menu Bar only (6)
-          controlCenter  - Show in Control Center only (1 or 9)
-          hide           - Don't Show (2, 4, 8, or 12)
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Hearing
+
+        Available settings:
+          both           - Show in both the Menu Bar and Control Center (3)
+          menuBar        - Show in the Menu Bar only (6)
+          controlCenter  - Show in Control Center only (9)
+          hide           - Don't Show (12)
       '';
     };
 
@@ -223,13 +272,16 @@ in
         hide = 12;
       } 12;
       description = ''
-        Apple menu > System Preferences > Control Center > Keyboard Brightness
+        Show a Keyboard Brightness control in menu bar.
 
-        Options:
-          both           - Show in Menu Bar and Control Center (3)
-          menuBar        - Show in Menu Bar only (6)
-          controlCenter  - Show in Control Center only (1 or 9)
-          hide           - Don't Show (2, 4, 8, or 12)
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Keyboard Brightness
+
+        Available settings:
+          both           - Show in both the Menu Bar and Control Center (3)
+          menuBar        - Show in the Menu Bar only (6)
+          controlCenter  - Show in Control Center only (9)
+          hide           - Don't Show (12)
       '';
     };
 
@@ -250,13 +302,16 @@ in
         hide = 12;
       } 12;
       description = ''
-        Apple menu > System Preferences > Control Center > Music Recognition
+        Show a Music Recognition control in menu bar.
 
-        Options:
-          both           - Show in Menu Bar and Control Center (3)
-          menuBar        - Show in Menu Bar only (6)
-          controlCenter  - Show in Control Center only (1 or 9)
-          hide           - Don't Show (2, 4, 8, or 12)
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Music Recognition
+
+        Available settings:
+          both           - Show in both the Menu Bar and Control Center (3)
+          menuBar        - Show in the Menu Bar only (6)
+          controlCenter  - Show in Control Center only (9)
+          hide           - Don't Show (12)
       '';
     };
 
@@ -266,6 +321,8 @@ in
           "whenActive"
           "hide"
           "always"
+          true
+          false
         ]
       );
       default = null;
@@ -273,14 +330,22 @@ in
         always = 18;
         hide = 8;
         whenActive = 2;
+
+        true = lib.warn "Using 'true' is deprecated; please use \"always\" instead" 18;
+        false = lib.warn "Using 'false' is deprecated; please use \"whenActive\" instead" 2;
       } 2;
       description = ''
-        Apple menu > System Preferences > Control Center > Now Playing
+        Show a Now Playing control in menu bar.
 
-        Options:
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Now Playing
+
+        Available settings:
           whenActive  - Show When Active (2)
           hide        - Don't Show in Menu Bar (8)
           always      - Always Show in Menu Bar (18)
+
+        Note: Boolean values are deprecated; please use the enum values.
       '';
     };
 
@@ -299,9 +364,12 @@ in
         whenActive = 2;
       } 2;
       description = ''
-        Apple menu > System Preferences > Control Center > Screen Mirroring
+        Show a Screen Mirroring control in menu bar.
 
-        Options:
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Screen Mirroring
+
+        Available settings:
           whenActive  - Show When Active (2)
           hide        - Don't Show in Menu Bar (8)
           always      - Always Show in Menu Bar (18)
@@ -314,6 +382,8 @@ in
           "whenActive"
           "hide"
           "always"
+          true
+          false
         ]
       );
       default = null;
@@ -321,14 +391,22 @@ in
         always = 18;
         hide = 8;
         whenActive = 2;
+
+        true = lib.warn "Using 'true' is deprecated; please use \"always\" instead" 18;
+        false = lib.warn "Using 'false' is deprecated; please use \"whenActive\" instead" 2;
       } 2;
       description = ''
-        Apple menu > System Preferences > Control Center > Sound
+        Show a Sound control in menu bar.
 
-        Options:
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Sound
+
+        Available settings:
           whenActive  - Show When Active (2)
           hide        - Don't Show in Menu Bar (8)
           always      - Always Show in Menu Bar (18)
+
+        Note: Boolean values are deprecated; please use the enum values.
       '';
     };
 
@@ -340,12 +418,14 @@ in
         false = 8;
       };
       description = ''
-        Apple menu > System Preferences > Control Center > Stage Manager
+        Show a Stage Manager control in menu bar.
 
-        Show a Wi-Fi control in menu bar. Default is null.
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Stage Manager
 
-        2 = Show in Menu Bar
-        8 = Don't Show in Menu Bar
+        Available settings:
+          true   - Show in Menu Bar (2)
+          false  - Don't Show in Menu Bar (8)
       '';
     };
 
@@ -366,12 +446,15 @@ in
         hide = 28;
       } 28;
       description = ''
-        Apple menu > System Preferences > Control Center > Fast User Switching
+        Show a User Switcher control in menu bar.
 
-        Options:
-          both           - Show in Menu Bar and Control Center (19)
-          menuBar        - Show in Menu Bar (22)
-          controlCenter  - Show in Control Center (25)
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Fast User Switching
+
+        Available settings:
+          both           - Show in both the Menu Bar and Control Center (19)
+          menuBar        - Show in the Menu Bar only (22)
+          controlCenter  - Show in Control Center only (25)
           hide           - Don't Show (28)
       '';
     };
@@ -384,12 +467,14 @@ in
         false = 24;
       };
       description = ''
-        Apple menu > System Preferences > Control Center > Wi-Fi
+        Show a Wi-Fi control in menu bar.
 
-        Show a Wi-Fi control in menu bar. Default is null.
+        This option mirrors the setting found in:
+          System Preferences > Control Center > Wi-Fi
 
-        18 = Show in Menu Bar
-        24 = Don't Show in Menu Bar
+        Available settings:
+          true   - Show in Menu Bar (18)
+          false  - Don't Show in Menu Bar (24)
       '';
     };
 
